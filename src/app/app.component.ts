@@ -18,9 +18,13 @@ export class AppComponent {
   public fileSize!: number;
   public currentFileSize: number = 0;
 
-  constructor(private http: HttpClient) {}
+  public txtUri: string = "";
 
-
+  constructor(private http: HttpClient) {
+      this.txtUri = "https://127.0.0.1:10000/devstoreaccount1/dmstemp/f880a78e-6eee-4bb0-8349-9f78d0da793f?sv=2018-03-28&st=2023-03-20T19%3A28%3A38Z&se=2023-03-21T19%3A28%3A38Z&sr=c&sp=racwdl&sig=7k%2BJ%2F09JX%2FdU3feSh5Jm9bVFvKDm%2BxUnpvWElAuszOc%3D";
+  }
+  
+  
   public onFileChange = (event: any) => {
       this.currentFile = event.target.files[0];
       this.update();
@@ -29,8 +33,8 @@ export class AppComponent {
   public update = async () => {
       this.fileSize = this.currentFile!.size;
 
-      var sasUri = "https://127.0.0.1:10000/devstoreaccount1/dmstemp/c8761f54-d564-4910-9894-c507e1510ee0?sv=2021-10-04&ss=btqf&srt=sco&st=2023-03-20T14%3A29%3A57Z&se=2023-03-21T14%3A29%3A57Z&sp=rwdflacu&sig=UM%2BVScWwyn5%2FXTgAkflm3dft6Tn3wOkU4DLiRd11x70%3D";
-
+      var sasUri = this.txtUri;
+                
       var tempUri = sasUri.split("?", 2)[0];
       var splitted = tempUri.split("/");
       var containerName = splitted[splitted.length-2];
